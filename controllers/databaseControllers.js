@@ -17,12 +17,14 @@ module.exports = {
     });
   },
   addProduct: async (request, response) => {
-    const { name, price, description, id_users, id_categories } = request.body;
+    const { name, price, description, imgPath, id_users, id_categories } =
+      request.body;
+    console.log(request.body);
     let fetchQuerry = `INSERT INTO products VALUES (null, ${db.escape(
       name
-    )}, ${db.escape(price)}, ${db.escape(description)}, ${db.escape(
-      id_users
-    )}, ${db.escape(id_categories)})`;
+    )}, ${db.escape(price)},${db.escape(imgPath)}, ${db.escape(
+      description
+    )}, ${db.escape(id_users)}, ${db.escape(id_categories)})`;
     db.query(fetchQuerry, (err, result) => {
       if (err) {
         return response.status(400).send(err.message);
