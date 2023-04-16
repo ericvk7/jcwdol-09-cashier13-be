@@ -2,6 +2,7 @@ const { db, querry } = require("../database");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { request, response } = require("express");
+const { log } = require("util");
 
 module.exports = {
   fetchProduct: async (request, response) => {
@@ -16,26 +17,32 @@ module.exports = {
       return response.status(200).send(result);
     });
   },
-  addProduct: async (request, response) => {
-    const { name, price, description, imgPath, id_users, id_categories } =
-      request.body;
-    console.log(request.body);
-    let fetchQuerry = `INSERT INTO products VALUES (null, ${db.escape(
-      name
-    )}, ${db.escape(price)},${db.escape(imgPath)}, ${db.escape(
-      description
-    )}, ${db.escape(id_users)}, ${db.escape(id_categories)})`;
-    db.query(fetchQuerry, (err, result) => {
-      if (err) {
-        return response.status(400).send(err.message);
-      } else {
-        let fatchquerry = "SELECT * FROM products";
-        db.query(fatchquerry, (err, result) => {
-          return response.status(200).send(result);
-        });
-      }
-    });
-  },
+
+  // addProduct: async (request, response) => {
+  //   const { name, price, description, imgPath, id_users, id_categories } =
+  //     request.body;
+
+  //   const { file } = request;
+  //   const filepath = file ? "/" + file.filename : null;
+
+  //   console.log(filepath);
+
+  //   let fetchQuerry = `INSERT INTO products VALUES (null, ${db.escape(
+  //     name
+  //   )}, ${db.escape(price)},${db.escape(imgPath)}, ${db.escape(
+  //     description
+  //   )}, ${db.escape(id_users)}, ${db.escape(id_categories)})`;
+  //   db.query(fetchQuerry, (err, result) => {
+  //     if (err) {
+  //       return response.status(400).send(err.message);
+  //     } else {
+  //       let fatchquerry = "SELECT * FROM products";
+  //       db.query(fatchquerry, (err, result) => {
+  //         return response.status(200).send(result);
+  //       });
+  //     }
+  //   });
+  // },
 
   addCategories: async (request, response) => {
     const { name, id_users } = request.body;
