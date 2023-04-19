@@ -80,4 +80,18 @@ module.exports = {
       }
     });
   },
+
+  editCategories: async (request, response) => {
+    let idParams = request.params.id;
+    let dataUpdate = request.body;
+    console.log(dataUpdate);
+
+    let fetchQuerry = `UPDATE categories set name = ${dataUpdate}  where id = ${db.escape(
+      idParams
+    )}`;
+    db.query(fetchQuerry, (err, result) => {
+      if (err) response.status(500).send(err);
+      response.status(200).send(result);
+    });
+  },
 };
