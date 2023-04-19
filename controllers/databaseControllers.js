@@ -11,6 +11,25 @@ module.exports = {
       return response.status(200).send(result);
     });
   },
+
+  deletProduct: async (request, response) => {
+    let idParams = request.params.id;
+    console.log(idParams);
+    let fetchQuerry = `DELETE FROM db_jcwdol_mini_cashier_13.products WHERE id_products = ${db.escape(
+      idParams
+    )}`;
+    db.query(fetchQuerry, (err, result) => {
+      if (err) {
+        return response.status(400).send(err.message);
+      } else {
+        return response
+          .status(200)
+          .send({ isSucess: true, message: "Succes delete data" });
+        alert(response.data.message);
+      }
+    });
+  },
+
   fetchCategory: async (request, response) => {
     let fetchQuerry = `SELECT * FROM db_jcwdol_mini_cashier_13.categories`;
     db.query(fetchQuerry, (err, result) => {
