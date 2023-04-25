@@ -83,12 +83,12 @@ module.exports = {
 
   editCategories: async (request, response) => {
     let idParams = request.params.id;
-    let dataUpdate = request.body;
-    console.log(dataUpdate);
+    let dataUpdate = request.body.name;
 
-    let fetchQuerry = `UPDATE categories set name = ${dataUpdate}  where id = ${db.escape(
+    let fetchQuerry = `UPDATE db_jcwdol_mini_cashier_13.categories SET name = "${dataUpdate}" where id_categories = ${db.escape(
       idParams
     )}`;
+    console.log(fetchQuerry);
     db.query(fetchQuerry, (err, result) => {
       if (err) response.status(500).send(err);
       response.status(200).send(result);
