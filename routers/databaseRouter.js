@@ -9,5 +9,6 @@ routers.delete("/delet-product/:id", databaseControllers.deletProduct);
 routers.get("/get-categories", databaseControllers.fetchCategory);
 routers.post("/add-categories", databaseControllers.addCategories);
 routers.patch("/edit-category/:id", databaseControllers.editCategories);
+routers.delete("/delet-category/:id", databaseControllers.deletCategory);
 
 module.exports = routers;

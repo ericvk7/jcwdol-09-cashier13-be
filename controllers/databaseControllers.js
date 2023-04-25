@@ -94,4 +94,22 @@ module.exports = {
       response.status(200).send(result);
     });
   },
+
+  deletCategory: async (request, response) => {
+    let idParams = request.params.id;
+    console.log(idParams);
+    let fetchQuerry = `DELETE FROM db_jcwdol_mini_cashier_13.categories WHERE id_categories = ${db.escape(
+      idParams
+    )}`;
+    db.query(fetchQuerry, (err, result) => {
+      if (err) {
+        return response.status(400).send(err.message);
+      } else {
+        return response
+          .status(200)
+          .send({ isSucess: true, message: "Succes delete data" });
+        alert(response.data.message);
+      }
+    });
+  },
 };
