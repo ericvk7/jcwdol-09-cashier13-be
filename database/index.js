@@ -11,10 +11,11 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) {
-    return console.error(`error: ${err.message}`);
+    return console.log(`error : ${err.message}`);
   }
-  console.log("Connected to mysql server");
+  console.log("connect to mysql");
 });
 
 const query = util.promisify(db.query).bind(db);
+
 module.exports = { db, query };
